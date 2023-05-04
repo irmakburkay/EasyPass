@@ -64,6 +64,8 @@ public class PassEntryRecyclerViewAdapter extends
             name = view.findViewById(R.id.item_name);
             pass = view.findViewById(R.id.item_pass);
 
+            pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -94,6 +96,8 @@ public class PassEntryRecyclerViewAdapter extends
                     eventListener.onClick(view);
                 }
             });
+
+
 
         }
     }

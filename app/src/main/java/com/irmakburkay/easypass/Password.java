@@ -10,11 +10,22 @@ public class Password {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
+    private int order;
     private String name, pass;
     private int icon;
 
-    public Password(long id, String name, String pass, int icon) {
-        this.id = id;
+    public Password() {}
+
+    public Password(Password password) {
+        this.id = password.getId();
+        this.order = password.getOrder();
+        this.name = password.getName();
+        this.pass = password.getPass();
+        this.icon = password.getIcon();
+    }
+
+    public Password(int order, String name, String pass, int icon) {
+        this.order = order;
         this.name = name;
         this.pass = pass;
         this.icon = icon;
@@ -26,6 +37,14 @@ public class Password {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public String getName() {
@@ -57,11 +76,16 @@ public class Password {
         if (this == o) return true;
         if (!(o instanceof Password)) return false;
         Password password = (Password) o;
-        return getId() == password.getId() && getIcon() == password.getIcon() && getName().equals(password.getName()) && getPass().equals(password.getPass());
+        return getId() == password.getId() && getOrder() == password.getOrder() && getIcon() == password.getIcon() && getName().equals(password.getName()) && getPass().equals(password.getPass());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPass(), getIcon());
+        return Objects.hash(getId(), getOrder(), getName(), getPass(), getIcon());
     }
+
+    public Password copy() {
+        return new Password(this);
+    }
+
 }

@@ -20,10 +20,16 @@ public interface IPasswordDao {
     @Delete
     void deletePassword(Password password);
 
-    @Query("SELECT * FROM password")
+    @Query("SELECT * FROM password ORDER BY `order`")
     List<Password> loadAllPasswords();
 
     @Query("SELECT * FROM password WHERE id=:id")
     Password loadPasswordById(long id);
+
+    @Query("DELETE FROM password WHERE id=:id")
+    void deletePasswordById(long id);
+
+    @Query("DELETE FROM password")
+    void deleteAllPasswords();
 
 }
